@@ -1,7 +1,7 @@
-package olá.mundo;
+package ola.mundo;
 
 //@Peixesvetoriais
-public class OláMundo {
+public class OlaMundo {
 
     public static void main(String[] args) {
         String meuPrimeiroPrograma;
