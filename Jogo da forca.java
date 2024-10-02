@@ -8,7 +8,11 @@ public class Jogodaforca {
     public static void main(String[] args) {
         // Iniciando o Scanner
         Scanner scanchar = new Scanner(System.in);
+        // Iniciando as variaveis de vitoria
+        boolean vitoria = false;
+        boolean derrota = false;
         // Iniciando as variaveis
+        int erros = 0;
         int loop = 0;
         char letra;
         String palavracerta;
@@ -56,28 +60,72 @@ public class Jogodaforca {
         // Criptografa a palavra selecionada
         palavracerta = "_".repeat(palavra.length());
         do {
-            // Desenho da forca
+            // Começa o desenho da forca
             System.out.println(palavra);
             System.out.println("|-----|");
-            System.out.println("|     |");
-            System.out.println("|");
-            System.out.print("|  ");
-            System.out.print(palavracerta);
+            // Checa a variavel erros e constroi o boneco
+            switch (erros) {
+                case 1:
+                    System.out.println("|     O");// Cabeça
+                    break;
+                case 2:
+                    System.out.println("|     O" + "\n|     |");// Corpo
+                    break;
+                case 3:
+                    System.out.println("|     O" + "\n|   --|--");// Braços
+                    break;
+                case 4:
+                    System.out.println("|     O" + "\n|   --|--" + "\n|    ]");// Perna
+                    break;
+                case 5:
+                    System.out.println("|     O" + "\n|   --|--" + "\n|    ] [");// Perna
+                    break;
+                default:
+                    System.out.println("|     |");
+                    break;
+            }
+            System.out.println("|     ");
+            System.out.println("|  " + palavracerta);
+            // Verifica se o jogo já terminou
+            if (palavracerta.equals(palavra)) {
+                loop++;
+                vitoria = true;
+                continue;
+            }
+            // Verifica se você errou 5 vezes e termina o jogo
+            if (erros >= 5) {
+                loop++;
+                derrota = true;
+                continue;
+            }
             // Entrada de dados
             System.out.print("\n" + "Escreva uma letra: ");
+            // Iniciando variaveis e o scan para a forca
             letra = scanchar.next().charAt(0);
             resto = "";// Variável responsável por alterar a criptografia da palavra selecionada
-            // Verifica se a letra digitada tem na palavra
-            for (int i = 0; i < palavra.length(); i++) {
+            boolean erro = true;
+            // Verificador da palavra selecionada
+            for (int i = 0; i < palavra.length(); i++) { // Vai passar o loop por todas as letras
                 if (palavra.charAt(i) == letra) {// Verifica se a letra digitada tem na palavra selecionada
                     resto += String.valueOf(letra); // Soma a letra a forca
+                    erro = false;
                     continue;
                 }
                 resto += String.valueOf(palavracerta.charAt(i)); // Soma o resto da criptografia
             }
-            palavracerta = resto; // Define a palavra criptografada para o loop
-        } while (loop < 1);
+            // Verifica o erro e soma na variável
+            if (erro) {
+                erros++;
+            }
+            palavracerta = resto; // Define a palavra criptografada
+        } while (loop <= 1);
+        // Fecha o scanner do char
         scanchar.close();
+        // Checa se venceu ou perdeu e passa a mensagem
+        if (vitoria) {
+            System.out.println("Parabens!!! Você venceu!!!");
+        } else if (derrota) {
+            System.out.println("Sinto muito, você perdeu.");
+        }
     }
-
 }
