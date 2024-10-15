@@ -12,7 +12,6 @@ public class Jogodaforca {
         "elefante", "hipopotamo", "gato", "arara", "macaco", "baleia", "panda",
         "urso", "vaca", "tatu", "rato", "pato", "guaxinim", "canguru", "jacare", "crocodilo", "cobra",
         "rinoceronte" };
-        //di.dicionario();
         // Iniciando o Scanner
         Scanner scanstring = new Scanner(System.in);
         // Iniciando as variaveis de vitoria
@@ -27,11 +26,9 @@ public class Jogodaforca {
         String palavra = "0";
         String resto = "";
         // Seleciona uma palavra aleatória
-        
         Random random = new Random();
         int num = random.nextInt(palavras.length);
         palavra = palavras[num];
-
         // Criptografa a palavra selecionada
         palavracerta = "_".repeat(palavra.length());
         do {
